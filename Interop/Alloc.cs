@@ -9,6 +9,8 @@ using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
 using FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
 using RoleplayingVoice;
+using Dalamud.IoC;
+using Dalamud.Plugin.Services;
 
 namespace Ktisis.Interop {
 	internal static class Alloc {
@@ -47,9 +49,9 @@ namespace Ktisis.Interop {
 	
 		internal unsafe GameAlloc(ulong align = 16)
 			=> Address = (nint)IMemorySpace.GetDefaultSpace()->Malloc<T>(align);
-
-		public unsafe void Dispose() {
-			Plugin.PluginLog.Debug($"Disposing GameAlloc<{typeof(T)}>");
+        [PluginService] internal static IPluginLog Log { get; private set; } = null!;
+        public unsafe void Dispose() {
+            Log.Debug($"Disposing GameAlloc<{typeof(T)}>");
 			if (Disposed) return;
 			IMemorySpace.Free(Data); // Free our allocated memory.
 			Disposed = true;
