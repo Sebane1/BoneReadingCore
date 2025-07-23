@@ -8,7 +8,6 @@ using FFXIVClientStructs.Havok;
 using FFXIVClientStructs.FFXIV.Client.System.Memory;
 using FFXIVClientStructs.Havok.Common.Base.Math.QsTransform;
 using FFXIVClientStructs.Havok.Common.Base.Math.Matrix;
-using RoleplayingVoice;
 using Dalamud.IoC;
 using Dalamud.Plugin.Services;
 
